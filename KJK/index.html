@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Learning Center - Keamanan Jaringan - ETS</title>
+    <style>
+        /* CSS untuk Styling Halaman */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.7; 
+            margin: 0; 
+            padding: 25px; 
+            background-color: #f8f9fa; 
+            color: #212529; 
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: auto; 
+            background: #ffffff; 
+            padding: 20px 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+        }
+        h1, h2, h3 { 
+            color: #004085; 
+            border-bottom: 3px solid #b8daff; 
+            padding-bottom: 12px; 
+        }
+        h1 { 
+            text-align: center; 
+            font-size: 2.2em; 
+            border: none; 
+        }
+        
+        /* Gaya untuk Flashcard */
+        .flashcard-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 15px; 
+        }
+        details.flashcard { 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            border-radius: 8px; 
+            margin-bottom: 10px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s;
+        }
+        details.flashcard:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        summary.flashcard-term { 
+            font-weight: 600; 
+            padding: 15px; 
+            cursor: pointer; 
+            outline: none; 
+            color: #0056b3; 
+        }
+        summary.flashcard-term::marker { 
+            content: '✚ '; 
+            font-size: 1.2em; 
+        }
+        details[open] > summary.flashcard-term::marker { 
+            content: '− '; 
+        }
+        .flashcard-def { 
+            padding: 0px 20px 20px 40px; 
+            border-top: 1px solid #dee2e6; 
+            color: #495057; 
+        }
+        .flashcard-def ul { 
+            padding-left: 20px; 
+        }
+        
+        /* Gaya untuk Latihan Soal */
+        .question-block { 
+            background: #f8f9fa; 
+            border-left: 5px solid #007bff; 
+            margin: 25px 0; 
+            padding: 20px; 
+            border-radius: 0 8px 8px 0; 
+        }
+        .question-block p.question-text { 
+            font-weight: 600; 
+            margin-top: 0; 
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .options-grid label {
+            display: block;
+            background: #e9ecef;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .options-grid label:hover {
+            background: #dfe6ed;
+            border-color: #007bff;
+        }
+        .options-grid input {
+            margin-right: 12px;
+        }
+        
+        /* Gaya untuk tombol dan hasil */
+        .submit-btn { 
+            background-color: #28a745; 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            font-size: 1.1em; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover { 
+            background-color: #218838; 
+        }
+        #quiz-results {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎓 Platform Latihan Berpikir Kritis</h1>
+    <p style="text-align:center;">Dibuat khusus untuk Anda berdasarkan materi Keamanan Jaringan ITS.</p>
+    
+    <div id="flashcards">
+        <h2>🧠 Flashcards: Konsep Kunci Keamanan Jaringan</h2>
+        <p>Klik setiap istilah untuk membuka definisinya. Gunakan ini untuk me-<em>review</em> materi sebelum mengerjakan soal.</p>
+        
+        <h3>Firewall dan Infrastruktur</h3>
+        <div class="flashcard-grid">
+            <details class="flashcard"><summary class="flashcard-term">DMZ (Demilitarized Zone)</summary><div class="flashcard-def">Area khusus dalam desain firewall yang berfungsi sebagai zona penyangga untuk server publik (seperti web dan mail server). Akses dari jaringan publik ke DMZ diizinkan secara terbatas, namun akses dari publik ke jaringan privat diblokir.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">ZPF (Zone-Based Policy Firewall)</summary><div class="flashcard-def">Desain firewall modern yang mengelompokkan antarmuka ke dalam zona. Kebijakan keamanan diterapkan antar zona, bukan per antarmuka. Lalu lintas antar zona secara default diblokir, sedangkan lalu lintas di dalam zona yang sama diizinkan secara default.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Stateless Firewall</summary><div class="flashcard-def">Juga dikenal sebagai Packet Filtering Firewall, beroperasi di Layer 3 dan 4. Firewall ini memeriksa paket secara individual berdasarkan IP dan port tanpa menyimpan informasi status koneksi (stateless). Keunggulannya adalah cepat dan sederhana, namun tingkat keamanannya rendah.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Stateful Firewall</summary><div class="flashcard-def">Firewall yang melacak status setiap koneksi dalam sebuah `state table`. Ini memungkinkannya menganalisis lalu lintas hingga Layer 5 dan membuat keputusan yang lebih cerdas. Lebih aman dibandingkan firewall stateless.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Next-Gen Firewall (NGFW)</summary><div class="flashcard-def">Evolusi dari stateful firewall dengan fitur keamanan tambahan yang canggih, seperti Intrusion Prevention System (IPS), kontrol aplikasi (application awareness), dan integrasi dengan intelijen ancaman terbaru.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">IDS vs IPS</summary><div class="flashcard-def"><b>IDS (Intrusion Detection System)</b> bersifat pasif; ia hanya mendeteksi serangan dan memberikan peringatan (alert). <b>IPS (Intrusion Prevention System)</b> bersifat aktif; ia dapat mendeteksi dan langsung memblokir atau menghentikan serangan secara real-time. IPS harus berada di jalur lalu lintas utama (in-line), sedangkan IDS tidak.</div></details>
+            
+            <details class="flashcard"><summary class="flashcard-term">Design firewall (Secara umum ada 3)</summary><div class="flashcard-def">ada 3 secara umum, 1. Public & Private, di mana intinya pada design ini semua jaringan yang ada pada publik akan langsung diblokir. 2.DMZ(Demilitarized-zone) : Design ini menerapkan sistem by zone seperti server,komputer yang dapat mengakasesnya dsb, biasanya digunakan pada startup atau perusahaan kecil yang mungkin keterbatasan akan perangkat untuk setup firewall, intinya DMZ bekerja dengan sistem identified by zone,akses dari publik ke DMZ diizinkan namun tetap diawasi,namun traffic dari publik ke private tanpa permintaan akan diblokir.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">ZPF (Zone-Based Policy Firewall)</summary><div class="flashcard-def">Desain firewall modern yang mengelompokkan antarmuka ke dalam zona. Kebijakan keamanan diterapkan antar zona, bukan per antarmuka. Lalu lintas antar zona secara default diblokir, sedangkan lalu lintas di dalam zona yang sama diizinkan secara default.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Stateless Firewall</summary><div class="flashcard-def">Juga dikenal sebagai Packet Filtering Firewall, beroperasi di Layer 3 dan 4. Firewall ini memeriksa paket secara individual berdasarkan IP dan port tanpa menyimpan informasi status koneksi (stateless). Keunggulannya adalah cepat dan sederhana, namun tingkat keamanannya rendah.</div></details>s
+        </div>
+        
+        <h3>Serangan Jaringan & Protokol</h3>
+        <div class="flashcard-grid">
+            <details class="flashcard"><summary class="flashcard-term">ARP Spoofing/Poisoning</summary><div class="flashcard-def">Serangan yang memanipulasi ARP cache pada target dengan mengirimkan pesan ARP Reply palsu. Tujuannya adalah mengalihkan lalu lintas korban ke penyerang, memungkinkan serangan Man-in-the-Middle.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">DNS Tunneling</summary><div class="flashcard-def">Teknik menyembunyikan lalu lintas non-DNS di dalam kueri dan respons DNS. Sering digunakan untuk komunikasi Command & Control (C2) malware atau eksfiltrasi data karena lalu lintas DNS sering kali tidak diinspeksi secara ketat.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">DHCP Starvation</summary><div class="flashcard-def">Serangan Denial-of-Service di mana penyerang menghabiskan seluruh IP address pool pada server DHCP dengan mengirimkan banyak permintaan palsu (Fake DHCP Requests).</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Rogue DHCP Server</summary><div class="flashcard-def">Server DHCP palsu yang dipasang di jaringan oleh penyerang, biasanya setelah serangan DHCP Starvation berhasil. Tujuannya adalah memberikan konfigurasi jaringan yang salah (misalnya, gateway atau DNS palsu) kepada klien untuk melakukan serangan MitM atau phishing.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Fast Flux</summary><div class="flashcard-def">Teknik di mana alamat IP yang terkait dengan suatu nama domain diubah dengan sangat cepat, seringkali menggunakan botnet. Ini membuat infrastruktur berbahaya (seperti situs phishing) sulit dilacak dan diblokir.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Domain Generation Algorithm (DGA)</summary><div class="flashcard-def">Algoritma yang digunakan oleh malware untuk menghasilkan ribuan nama domain secara acak setiap hari. Malware akan mencoba menghubungi domain-domain ini, dan penyerang hanya perlu mendaftarkan satu di antaranya untuk mengaktifkan server Command & Control (C2).</div></details>
+        </div>
+
+        <h3>Keamanan Nirkabel (WLAN)</h3>
+        <div class="flashcard-grid">
+            <details class="flashcard"><summary class="flashcard-term">Rogue Access Point</summary><div class="flashcard-def">Sebuah access point (AP) ilegal yang terpasang di jaringan privat tanpa otorisasi dari administrator. Perangkat ini menciptakan celah keamanan karena seringkali tidak dikonfigurasi dengan benar dan dapat memberikan akses tidak sah ke sumber daya jaringan.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Wireless Hijacking (Evil Twin)</summary><div class="flashcard-def">Serangan di mana penyerang membuat AP palsu dengan SSID yang sama seperti hotspot publik yang sah. Korban yang tidak menaruh curiga akan terhubung ke AP palsu ini, memungkinkan penyerang untuk memantau lalu lintas (eavesdropping) dan melakukan serangan peer-to-peer.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">MAC Spoofing</summary><div class="flashcard-def">Tindakan mengubah alamat MAC pada sebuah perangkat untuk meniru perangkat lain. Karena kemudahannya, pemfilteran MAC (MAC filtering) dianggap sebagai metode keamanan yang lemah jika digunakan sendirian.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Eavesdropping</summary><div class="flashcard-def">Tindakan menguping atau mendengarkan data yang ditransfer melalui jaringan nirkabel. Ini bisa dilakukan secara pasif (casual) atau dengan niat jahat (malicious) menggunakan penganalisis protokol. Enkripsi yang kuat sangat penting untuk mencegah serangan ini.</div></details>
+            <details class="flashcard"><summary class="flashcard-term">Proses Asosiasi WLAN</summary><div class="flashcard-def">Proses tiga tahap yang harus dilalui klien nirkabel untuk terhubung ke AP: 1) **Menemukan** AP (baik secara pasif melalui <i>beacon frames</i> atau aktif melalui <i>probe requests</i>), 2) **Melakukan Autentikasi** dengan AP (misalnya, menggunakan password), 3) **Melakukan Asosiasi** dengan AP untuk mulai berkomunikasi di jaringan.</div></details>
+        </div>
+    </div>
+
+    <hr style="margin: 40px 0; border: 1px solid #eee;">
+
+    <div id="questions">
+        <h2>✍️ Latihan Soal Berpikir Kritis</h2>
+        <p>Pilihlah jawaban yang paling tepat untuk setiap skenario, lalu klik tombol "Periksa Jawaban" di bagian paling bawah.</p>
+        
+        <form id="critical-quiz-form">
+            
+            <h3>Bagian 1: Desain dan Kebijakan Firewall</h3>
+            <div class="question-block">
+                <p class="question-text">1. Sebuah startup fintech kecil harus meng-hosting server web publik, server database internal yang berisi data nasabah sensitif, dan jaringan LAN untuk 20 karyawan. Dengan anggaran terbatas, evaluasilah dua proposal desain firewall berikut: (A) Desain Private-Public sederhana menggunakan Stateful Firewall, atau (B) Desain DMZ menggunakan Stateful Firewall yang sama. Manakah yang akan Anda rekomendasikan dan mengapa? Justifikasikan jawaban Anda dengan mempertimbangkan prinsip "defense in depth".</p>
+                <div class="options-grid">
+                    <label><input type="radio" name="q1" value="A"> A. Desain Private-Public, karena lebih sederhana dan hemat biaya.</label>
+                    <label><input type="radio" name="q1" value="B"> B. Desain DMZ, karena memberikan segmentasi jaringan dan lapisan pertahanan tambahan yang krusial.</label>
+                    <label><input type="radio" name="q1" value="C"> C. Keduanya sama amannya karena menggunakan Stateful Firewall yang sama.</label>
+                </div>
+            </div>
+            <div class="question-block">
+                <p class="question-text">2. Seorang teknisi junior berpendapat, "Di ZPF, lalu lintas di dalam zona yang sama diizinkan secara default, jadi keamanannya sama saja dengan DMZ klasik." Apa kesalahpahaman utama dalam argumen ini?</p>
+                <div class="options-grid">
+                    <label><input type="radio" name="q2" value="A"> A. Argumennya benar, ZPF dan DMZ klasik pada dasarnya sama.</label>
+                    <label><input type="radio" name="q2" value="B"> B. Kesalahannya adalah ZPF tidak mengizinkan lalu lintas di dalam zona yang sama.</label>
+                    <label><input type="radio" name="q2" value="C"> C. Kesalahannya adalah mengabaikan kekuatan ZPF dalam membuat banyak zona granular dan kebijakan antar-zona yang secara default menolak semua lalu lintas.</label>
+                </div>
+            </div>
+            <h3>Bagian 1: Desain dan Kebijakan Firewall (Soal 1-9)</h3>
+            <div class="question-block"><p class="question-text">1. Startup fintech harus meng-hosting server web publik dan database nasabah internal. Manakah desain firewall yang memberikan implementasi prinsip "defense in depth" paling baik?</p><div class="options-grid"><label><input type="radio" name="q1" value="A"> A. Desain Private-Public sederhana.</label><label><input type="radio" name="q1" value="B"> B. Desain DMZ.</label><label><input type="radio" name="q1" value="C"> C. Menggunakan Host-based Firewall saja.</label></div></div>
+            <div class="question-block"><p class="question-text">2. Seorang teknisi junior mengklaim ZPF sama amannya dengan DMZ klasik karena lalu lintas <i>intra-zone</i> diizinkan secara default. Apa kesalahpahaman utama dalam klaim ini?</p><div class="options-grid"><label><input type="radio" name="q2" value="A"> A. Klaim tersebut sepenuhnya benar.</label><label><input type="radio" name="q2" value="B"> B. Ia mengabaikan kekuatan ZPF dalam membuat banyak zona granular dan kebijakan <i>inter-zone</i> yang default-deny.</label><label><input type="radio" name="q2" value="C"> C. Lalu lintas <i>intra-zone</i> di ZPF sebenarnya default-deny.</label></div></div>
+            <div class="question-block"><p class="question-text">3. Untuk mengatasi firewall yang lambat karena aturan ACL yang kompleks, solusi jangka panjang manakah yang lebih superior?</p><div class="options-grid"><label><input type="radio" name="q3" value="A"> A. Mengganti ke Next-Gen Firewall (NGFW) dengan <i>application awareness</i>.</label><label><input type="radio" name="q3" value="B"> B. Menyederhanakan aturan ACL yang ada.</label><label><input type="radio" name="q3" value="C"> C. Menambah memori pada firewall yang ada.</label></div></div>
+            <div class="question-block"><p class="question-text">4. Kebijakan "izinkan semua trafik keluar dari jaringan privat" menciptakan risiko. Ancaman modern manakah yang secara langsung mengeksploitasi kebijakan ini?</p><div class="options-grid"><label><input type="radio" name="q4" value="A"> A. ARP Poisoning.</label><label><input type="radio" name="q4" value="B"> B. DHCP Starvation.</label><label><input type="radio" name="q4" value="C"> C. DNS Tunneling untuk eksfiltrasi data.</label></div></div>
+            <div class="question-block"><p class="question-text">5. Untuk melindungi server web dari serangan SQL Injection (Layer 7), jenis firewall manakah yang paling efektif?</p><div class="options-grid"><label><input type="radio" name="q5" value="A"> A. Stateless Firewall.</label><label><input type="radio" name="q5" value="B"> B. Stateful Firewall.</label><label><input type="radio" name="q5" value="C"> C. Application Gateway Firewall (Proxy).</label></div></div>
+            <div class="question-block"><p class="question-text">6. Manakah yang merupakan keterbatasan utama dari IDS dibandingkan dengan IPS?</p><div class="options-grid"><label><input type="radio" name="q6" value="A"> A. IDS lebih mahal daripada IPS.</label><label><input type="radio" name="q6" value="B"> B. IDS bersifat pasif dan tidak dapat menghentikan serangan secara langsung.</label><label><input type="radio" name="q6" value="C"> C. IDS tidak dapat mendeteksi pola serangan yang kompleks.</label></div></div>
+            <div class="question-block"><p class="question-text">7. Manakah pernyataan yang paling akurat mendefinisikan Extended ACL?</p><div class="options-grid"><label><input type="radio" name="q7" value="A"> A. Hanya memfilter berdasarkan alamat IP sumber.</label><label><input type="radio" name="q7" value="B"> B. Memfilter berdasarkan alamat IP sumber, tujuan, protokol, dan nomor port.</label><label><input type="radio" name="q7" value="C"> C. Hanya dapat digunakan untuk lalu lintas TCP.</label></div></div>
+            <div class="question-block"><p class="question-text">8. Anda ingin menerapkan firewall di antara dua segmen jaringan internal tanpa mengubah skema pengalamatan IP. Jenis firewall manakah yang paling cocok untuk tujuan ini?</p><div class="options-grid"><label><input type="radio" name="q8" value="A"> A. Host-based Firewall.</label><label><input type="radio" name="q8" value="B"> B. Transparent Firewall (Layer 2).</label><label><input type="radio" name="q8" value="C"> C. Application Gateway.</label></div></div>
+            <div class="question-block"><p class="question-text">9. Apa risiko terbesar dari kesalahan konfigurasi firewall di perbatasan jaringan?</p><div class="options-grid"><label><input type="radio" name="q9" value="A"> A. Penurunan kinerja jaringan.</label><label><input type="radio" name="q9" value="B"> B. Firewall bisa menjadi <i>single point of failure</i>, membuka celah keamanan besar.</label><label><input type="radio" name="q9" value="C"> C. Biaya lisensi perangkat lunak meningkat.</label></div></div>
+
+            <h3>Bagian 2: Ancaman dan Mitigasi Serangan Protokol (Soal 10-27)</h3>
+            <div class="question-block"><p class="question-text">10. Satu host internal menghasilkan ribuan kueri DNS per menit ke subdomain acak. Serangan apa yang paling mungkin terjadi?</p><div class="options-grid"><label><input type="radio" name="q10" value="A"> A. DNS Tunneling.</label><label><input type="radio" name="q10" value="B"> B. Fast Flux.</label><label><input type="radio" name="q10" value="C"> C. ARP Flooding.</label></div></div>
+            <div class="question-block"><p class="question-text">11. Klien sah tidak bisa mendapat IP, lalu tiba-tiba mendapat konfigurasi dari sumber tak dikenal. Ini adalah kombinasi dari serangan apa?</p><div class="options-grid"><label><input type="radio" name="q11" value="A"> A. DNS Spoofing dan ARP Poisoning.</label><label><input type="radio" name="q11" value="B"> B. DHCP Starvation dan Rogue DHCP Server.</label><label><input type="radio" name="q11" value="C"> C. MAC Spoofing dan DNS Tunneling.</label></div></div>
+            <div class="question-block"><p class="question-text">12. Metode mitigasi mana yang secara langsung dirancang untuk memvalidasi keaslian paket ARP dengan mencocokkannya ke database IP-ke-MAC yang tepercaya?</p><div class="options-grid"><label><input type="radio" name="q12" value="A"> A. Port Security.</label><label><input type="radio" name="q12" value="B"> B. Dynamic ARP Inspection (DAI).</label><label><input type="radio" name="q12" value="C"> C. Stateful Firewall.</label></div></div>
+            <div class="question-block"><p class="question-text">13. Teknik penghindaran deteksi mana yang paling sulit dilawan menggunakan daftar blokir (blacklist) statis karena sifatnya yang menghasilkan domain baru secara massal?</p><div class="options-grid"><label><input type="radio" name="q13" value="A"> A. Fast Flux.</label><label><input type="radio" name="q13" value="B"> B. Domain Generation Algorithms (DGA).</label><label><input type="radio" name="q13" value="C"> C. DNS Domain Shadowing.</label></div></div>
+            <div class="question-block"><p class="question-text">14. Apa konsep utama yang membuat serangan DNS Amplification sangat efektif untuk DDoS?</p><div class="options-grid"><label><input type="radio" name="q14" value="A"> A. Penyerang mengirim permintaan besar dan mendapat respons kecil.</label><label><input type="radio" name="q14" value="B"> B. Penyerang mengirim permintaan kecil dan memicu respons yang jauh lebih besar dari server ke korban.</label><label><input type="radio" name="q14" value="C"> C. Penyerang meracuni cache DNS dengan alamat IP palsu.</label></div></div>
+            <div class="question-block"><p class="question-text">15. Kerentanan fundamental apa dalam protokol ARP yang dieksploitasi oleh serangan ARP Poisoning?</p><div class="options-grid"><label><input type="radio" name="q15" value="A"> A. ARP hanya bekerja di jaringan nirkabel.</label><label><input type="radio" name="q15" value="B"> B. ARP tidak memiliki mekanisme autentikasi dan secara inheren mempercayai setiap balasan yang diterimanya.</label><label><input type="radio" name="q15" value="C"> C. ARP menggunakan enkripsi yang lemah.</label></div></div>
+            <div class="question-block"><p class="question-text">16. Mengapa serangan `drive-by` menggunakan iFrame berbahaya sering dianggap lebih berbahaya daripada email phishing?</p><div class="options-grid"><label><input type="radio" name="q16" value="A"> A. Email phishing tidak pernah berhasil.</label><label><input type="radio" name="q16" value="B"> B. Serangan iFrame dapat menginfeksi korban secara otomatis tanpa interaksi lebih lanjut setelah mengunjungi situs yang disusupi.</label><label><input type="radio" name="q16" value="C"> C. iFrame hanya menyerang server, bukan klien.</label></div></div>
+            <div class="question-block"><p class="question-text">17. Kritisi pernyataan ini: "Karena HTTPS mengenkripsi data, serangan Man-in-the-Middle menjadi tidak relevan." Mengapa pernyataan ini bisa salah?</p><div class="options-grid"><label><input type="radio" name="q17" value="A"> A. Pernyataan ini benar, HTTPS memberikan perlindungan total.</label><label><input type="radio" name="q17" value="B"> B. Penyerang masih bisa melakukan serangan seperti SSL Stripping atau menyajikan sertifikat palsu yang bisa diabaikan pengguna.</label><label><input type="radio" name="q17" value="C"> C. HTTPS hanya mengenkripsi header, bukan data.</label></div></div>
+            <div class="question-block"><p class="question-text">18. Mengapa DNS Domain Shadowing lebih sulit dideteksi oleh sistem reputasi domain?</p><div class="options-grid"><label><input type="radio" name="q18" value="A"> A. Karena menggunakan domain yang baru didaftarkan.</label><label><input type="radio" name="q18" value="B"> B. Karena membuat subdomain berbahaya di bawah domain induk yang sah dan tepercaya.</label><label><input type="radio" name="q18" value="C"> C. Karena hanya bekerja pada jaringan internal.</label></div></div>
+            <div class="question-block"><p class="question-text">19. Apa tujuan utama dari serangan DHCP Spoofing?</p><div class="options-grid"><label><input type="radio" name="q19" value="A"> A. Untuk memberikan alamat IP lebih cepat kepada klien.</label><label><input type="radio" name="q19" value="B"> B. Agar rogue DHCP server dapat memberikan konfigurasi berbahaya kepada klien sebelum server yang sah merespons.</label><label><input type="radio" name="q19" value="C"> C. Untuk menguji keandalan server DHCP yang sah.</label></div></div>
+            <div class="question-block"><p class="question-text">20. Manakah dari berikut ini yang merupakan contoh serangan berbasis lampiran email (attachment-based attack)?</p><div class="options-grid"><label><input type="radio" name="q20" value="A"> A. Email berisi tautan ke situs phishing.</label><label><input type="radio" name="q20" value="B"> B. Email dengan file PDF yang disamarkan sebagai faktur, namun berisi malware.</label><label><input type="radio" name="q20" value="C"> C. Email yang memalsukan alamat pengirim (email spoofing).</label></div></div>
+            <div class="question-block"><p class="question-text">21. Teknik `HTTP 302 Cushioning` digunakan penyerang untuk...</p><div class="options-grid"><label><input type="radio" name="q21" value="A"> A. Mempercepat waktu muat halaman web.</label><label><input type="radio" name="q21" value="B"> B. Mengaburkan tujuan akhir berbahaya melalui serangkaian pengalihan (redirect) yang sah.</label><label><input type="radio" name="q21" value="C"> C. Mengompres data HTTP untuk menghemat bandwidth.</label></div></div>
+            <div class="question-block"><p class="question-text">22. Apa yang dimaksud dengan "botnet"?</p><div class="options-grid"><label><input type="radio" name="q22" value="A"> A. Perangkat lunak antivirus.</label><label><input type="radio" name="q22" value="B"> B. Sekumpulan perangkat yang terinfeksi malware dan dikendalikan dari jarak jauh oleh penyerang.</label><label><input type="radio" name="q22" value="C"> C. Server DNS yang aman.</label></div></div>
+            <div class="question-block"><p class="question-text">23. Apa kerentanan utama yang dieksploitasi oleh serangan DNS Cache Poisoning?</p><div class="options-grid"><label><input type="radio" name="q23" value="A"> A. Server DNS yang lambat merespons.</label><label><input type="radio" name="q23" value="B"> B. DNS resolver yang menerima dan menyimpan data DNS palsu dari sumber yang tidak tepercaya.</label><label><input type="radio" name="q23" value="C"> C. Pengguna salah mengetik nama domain.</label></div></div>
+            <div class="question-block"><p class="question-text">24. Manakah dari IP Services berikut yang beroperasi di Layer 2 OSI?</p><div class="options-grid"><label><input type="radio" name="q24" value="A"> A. DNS.</label><label><input type="radio" name="q24" value="B"> B. DHCP.</label><label><input type="radio" name="q24" value="C"> C. ARP.</label></div></div>
+            <div class="question-block"><p class="question-text">25. Dalam konteks serangan web, apa itu "Exploit Kit"?</p><div class="options-grid"><label><input type="radio" name="q25" value="A"> A. Perangkat lunak yang digunakan untuk menulis kode program.</label><label><input type="radio" name="q25" value="B"> B. Alat yang secara otomatis memindai kerentanan pada browser atau plugin korban dan mengirimkan muatan berbahaya yang sesuai.</label><label><input type="radio" name="q25" value="C"> C. Kumpulan kata sandi yang sering digunakan.</label></div></div>
+            <div class="question-block"><p class="question-text">26. Serangan `NXDOMAIN` bertujuan untuk...</p><div class="options-grid"><label><input type="radio" name="q26" value="A"> A. Mencuri nama domain yang sudah ada.</label><label><input type="radio" name="q26" value="B"> B. Membanjiri server DNS dengan permintaan untuk domain yang tidak ada, menghabiskan sumber dayanya.</label><label><input type="radio" name="q26" value="C"> C. Mengarahkan domain ke alamat IP yang benar.</label></div></div>
+            <div class="question-block"><p class="question-text">27. Kesalahan konfigurasi firewall yang membuka port 445 (SMB) ke internet secara langsung meningkatkan risiko serangan...</p><div class="options-grid"><label><input type="radio" name="q27" value="A"> A. Phishing.</label><label><input type="radio" name="q27" value="B"> B. Worm penyebar mandiri seperti WannaCry.</label><label><input type="radio" name="q27" value="C"> C. DNS Tunneling.</label></div></div>
+
+            <h3>Bagian 3: Keamanan Nirkabel dan Manajemen Jaringan (Soal 28-45)</h3>
+            <div class="question-block"><p class="question-text">28. Sebuah AP palsu dengan SSID "KafeAsik_WiFi" dibuat oleh penyerang di dekat kafe asli. Serangan ini dikenal sebagai?</p><div class="options-grid"><label><input type="radio" name="q28" value="A"> A. Rogue Access Point.</label><label><input type="radio" name="q28" value="B"> B. Wireless Hijacking (Evil Twin).</label><label><input type="radio" name="q28" value="C"> C. MAC Spoofing.</label></div></div>
+            <div class="question-block"><p class="question-text">29. Mengapa mengamankan WLAN hanya dengan MAC Filtering dianggap tidak efektif?</p><div class="options-grid"><label><input type="radio" name="q29" value="A"> A. Karena MAC address sulit ditemukan.</label><label><input type="radio" name="q29" value="B"> B. Karena penyerang dapat dengan mudah melakukan MAC Spoofing untuk meniru perangkat yang sah.</label><label><input type="radio" name="q29" value="C"> C. Karena MAC Filtering memperlambat jaringan.</label></div></div>
+            <div class="question-block"><p class="question-text">30. Mode penemuan AP nirkabel mana yang memiliki risiko privasi lebih tinggi bagi pengguna karena menyiarkan riwayat koneksi SSID?</p><div class="options-grid"><label><input type="radio" name="q30" value="A"> A. Mode Pasif (mendengarkan beacon).</label><label><input type="radio" name="q30" value="B"> B. Mode Aktif (mengirim probe request).</label><label><input type="radio" name="q30" value="C"> C. Keduanya sama-sama berisiko.</label></div></div>
+            <div class="question-block"><p class="question-text">31. Fitur "Client Isolation" pada AP Wi-Fi tamu berguna untuk memitigasi serangan apa?</p><div class="options-grid"><label><input type="radio" name="q31" value="A"> A. Serangan dari internet.</label><label><input type="radio" name="q31" value="B"> B. Serangan Peer-to-Peer antar tamu di jaringan yang sama.</label><label><input type="radio" name="q31" value="C"> C. Serangan Eavesdropping.</label></div></div>
+            <div class="question-block"><p class="question-text">32. Apa kelemahan kriptografi fundamental pada enkripsi WEP?</p><div class="options-grid"><label><input type="radio" name="q32" value="A"> A. Penggunaan kunci enkripsi yang terlalu panjang.</label><label><input type="radio" name="q32" value="B"> B. Penggunaan Vektor Inisialisasi (IV) 24-bit yang kecil dan dapat diprediksi, yang mengarah ke cracking kunci.</label><label><input type="radio" name="q32" value="C"> C. WEP tidak kompatibel dengan perangkat modern.</label></div></div>
+            <div class="question-block"><p class="question-text">33. Protokol AAA mana yang paling cocok jika Anda perlu memberikan kontrol perintah CLI spesifik kepada administrator jaringan?</p><div class="options-grid"><label><input type="radio" name="q33" value="A"> A. RADIUS.</label><label><input type="radio" name="q33" value="B"> B. TACACS+.</label><label><input type="radio" name="q33" value="C"> C. SNMP.</label></div></div>
+            <div class="question-block"><p class="question-text">34. Mengapa sinkronisasi waktu menggunakan NTP sangat penting untuk investigasi insiden keamanan?</p><div class="options-grid"><label><input type="radio" name="q34" value="A"> A. Untuk memastikan semua perangkat berjalan lebih cepat.</label><label><input type="radio" name="q34" value="B"> B. Untuk membangun timeline kejadian yang akurat dengan menghubungkan log dari berbagai perangkat.</label><label><input type="radio" name="q34" value="C"> C. NTP diperlukan untuk mengenkripsi log.</label></div></div>
+            <div class="question-block"><p class="question-text">35. Untuk mendapatkan gambaran statistik tingkat tinggi tentang pola lalu lintas jaringan, manakah alat yang lebih efisien?</p><div class="options-grid"><label><input type="radio" name="q35" value="A"> A. NetFlow.</label><label><input type="radio" name="q35" value="B"> B. Port Mirroring dengan Wireshark.</label><label><input type="radio" name="q35" value="C"> C. Syslog.</label></div></div>
+            <div class="question-block"><p class="question-text">36. Solusi mana yang paling aman untuk memberikan akses jarak jauh bagi karyawan?</p><div class="options-grid"><label><input type="radio" name="q36" value="A"> A. Membuka port RDP ke internet.</label><label><input type="radio" name="q36" value="B"> B. Mengimplementasikan Remote Access VPN.</label><label><input type="radio" name="q36" value="C"> C. Menggunakan Telnet.</label></div></div>
+            <div class="question-block"><p class="question-text">37. Apa kelemahan keamanan utama dari SNMPv1/v2c?</p><div class="options-grid"><label><input type="radio" name="q37" value="A"> A. Terlalu lambat untuk jaringan modern.</label><label><input type="radio" name="q37" value="B"> B. Mengirim <i>community string</i> (kata sandi) dalam bentuk teks biasa (plain text).</label><label><input type="radio" name="q37" value="C"> C. Hanya dapat memantau router, bukan switch.</label></div></div>
+            <div class="question-block"><p class="question-text">38. Dalam kerangka AAA, apa fungsi dari 'Authorization'?</p><div class="options-grid"><label><input type="radio" name="q38" value="A"> A. Memverifikasi identitas pengguna ("Siapa Anda?").</label><label><input type="radio" name="q38" value="B"> B. Menentukan apa yang boleh dilakukan pengguna setelah login ("Apa yang boleh Anda lakukan?").</label><label><input type="radio" name="q38" value="C"> C. Mencatat aktivitas pengguna ("Apa yang sudah Anda lakukan?").</label></div></div>
+            <div class="question-block"><p class="question-text">39. Manakah standar WLAN yang pertama kali memperkenalkan kecepatan hingga 54 Mbps menggunakan frekuensi 5 GHz?</p><div class="options-grid"><label><input type="radio" name="q39" value="A"> A. 802.11b.</label><label><input type="radio" name="q39" value="B"> B. 802.11g.</label><label><input type="radio" name="q39" value="C"> C. 802.11a.</label></div></div>
+            <div class="question-block"><p class="question-text">40. Apa perbedaan utama antara media terpandu (guided media) dan media tidak terpandu (unguided media)?</p><div class="options-grid"><label><input type="radio" name="q40" value="A"> A. Guided media bersifat broadcast, unguided bersifat point-to-point.</label><label><input type="radio" name="q40" value="B"> B. Guided media menggunakan propagasi gelombang elektromagnetik, unguided menggunakan media padat.</label><label><input type="radio" name="q40" value="C"> C. Guided media adalah media fisik seperti tembaga/fiber, unguided adalah nirkabel seperti frekuensi radio.</label></div></div>
+            <div class="question-block"><p class="question-text">41. Standar 802.11ax juga dikenal sebagai...</p><div class="options-grid"><label><input type="radio" name="q41" value="A"> A. WiFi 4.</label><label><input type="radio" name="q41" value="B"> B. WiFi 5.</label><label><input type="radio" name="q41" value="C"> C. WiFi 6.</label></div></div>
+            <div class="question-block"><p class="question-text">42. Dalam struktur frame 802.11, field manakah yang digunakan untuk kontrol kesalahan pada Layer 2?</p><div class="options-grid"><label><input type="radio" name="q42" value="A"> A. Frame Control.</label><label><input type="radio" name="q42" value="B"> B. CRC (Cyclic Redundancy Check).</label><label><input type="radio" name="q42" value="C"> C. Address1.</label></div></div>
+            <div class="question-block"><p class="question-text">43. Serangan yang memanipulasi orang agar memberikan informasi sensitif seperti kata sandi disebut...</p><div class="options-grid"><label><input type="radio" name="q43" value="A"> A. Social Engineering.</label><label><input type="radio" name="q43" value="B"> B. Encryption Cracking.</label><label><input type="radio" name="q43" value="C"> C. Denial-of-Service.</label></div></div>
+            <div class="question-block"><p class="question-text">44. Apa perbedaan mendasar antara Collision Avoidance (digunakan di WLAN) dan Collision Detection (digunakan di Ethernet)?</p><div class="options-grid"><label><input type="radio" name="q44" value="A"> A. Keduanya adalah mekanisme yang sama.</label><label><input type="radio" name="q44" value="B"> B. WLAN mencoba MENGHINDARI tabrakan sebelum terjadi, sedangkan Ethernet MENDETEKSI tabrakan setelah terjadi dan mengirim ulang.</label><label><input type="radio" name="q44" value="C"> C. Ethernet menggunakan Collision Avoidance, dan WLAN menggunakan Collision Detection.</label></div></div>
+            <div class="question-block"><p class="question-text">45. Mengapa pendekatan keamanan yang hanya fokus pada pertahanan perbatasan (perimeter defense) dianggap rapuh?</p><div class="options-grid"><label><input type="radio" name="q45" value="A"> A. Karena semua ancaman selalu berhasil dihentikan di perbatasan.</label><label><input type="radio" name="q45" value="B"> B. Karena mengabaikan ancaman dari dalam (insider threats) dan host yang sudah terinfeksi yang dapat bergerak bebas secara lateral.</label><label><input type="radio" name="q45" value="C"> C. Karena firewall perbatasan tidak efektif.</label></div></div>
+
+            <button type="submit" class="submit-btn">Periksa Jawaban</button>
+        </form>
+        <div id="quiz-results"></div>
+    </div>
+</div>
+
+<script>
+    // JavaScript untuk menangani submit kuis
+    document.getElementById('critical-quiz-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Mencegah form dari reload halaman
+        
+        // Kunci jawaban (untuk soal yang sudah ada)
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'C'
+            // Tambahkan kunci jawaban untuk soal 3-45 di sini
+            // contoh: q3: 'A', q4: 'C', dst.
+        };
+        
+        const formElements = event.target.elements;
+        let score = 0;
+        let totalQuestions = Object.keys(correctAnswers).length;
+        let resultsHTML = "<h3>Hasil Evaluasi:</h3>";
+        
+        for (const questionName in correctAnswers) {
+            const radioButtons = formElements[questionName];
+            let userAnswer = '';
+            
+            // Cari jawaban yang dipilih pengguna
+            if (radioButtons) {
+                for (const button of radioButtons) {
+                    if (button.checked) {
+                        userAnswer = button.value;
+                        break;
+                    }
+                }
+            }
+
+            const questionBlock = document.querySelector(`input[name="${questionName}"]`).closest('.question-block');
+            
+            if (userAnswer) {
+                if (userAnswer === correctAnswers[questionName]) {
+                    score++;
+                    resultsHTML += `<p><strong>Soal ${questionName.substring(1)}: Benar!</strong> ✅</p>`;
+                    questionBlock.style.borderColor = '#28a745';
+                } else {
+                    resultsHTML += `<p><strong>Soal ${questionName.substring(1)}: Salah.</strong> Jawaban yang tepat adalah <strong>${correctAnswers[questionName]}</strong>. ❌</p>`;
+                    questionBlock.style.borderColor = '#dc3545';
+                }
+            } else {
+                resultsHTML += `<p><strong>Soal ${questionName.substring(1)}: Belum dijawab.</strong></p>`;
+                questionBlock.style.borderColor = '#ffc107';
+            }
+        }
+        
+        const finalPercentage = (score / totalQuestions) * 100;
+        resultsHTML += `<hr><h4>Total Skor Anda: ${score} dari ${totalQuestions} (${finalPercentage.toFixed(1)}%)</h4>`;
+        
+        const resultsDiv = document.getElementById('quiz-results');
+        resultsDiv.innerHTML = resultsHTML;
+        
+        // Atur warna latar belakang hasil berdasarkan skor
+        if (finalPercentage >= 80) {
+            resultsDiv.style.backgroundColor = '#d4edda';
+            resultsDiv.style.border = '1px solid #c3e6cb';
+        } else if (finalPercentage >= 50) {
+            resultsDiv.style.backgroundColor = '#fff3cd';
+            resultsDiv.style.border = '1px solid #ffeeba';
+        } else {
+            resultsDiv.style.backgroundColor = '#f8d7da';
+            resultsDiv.style.border = '1px solid #f5c6cb';
+        }
+        
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
