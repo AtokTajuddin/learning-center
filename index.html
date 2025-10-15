@@ -183,23 +183,6 @@
         
         <form id="critical-quiz-form">
             
-            <h3>Bagian 1: Desain dan Kebijakan Firewall</h3>
-            <div class="question-block">
-                <p class="question-text">1. Sebuah startup fintech kecil harus meng-hosting server web publik, server database internal yang berisi data nasabah sensitif, dan jaringan LAN untuk 20 karyawan. Dengan anggaran terbatas, evaluasilah dua proposal desain firewall berikut: (A) Desain Private-Public sederhana menggunakan Stateful Firewall, atau (B) Desain DMZ menggunakan Stateful Firewall yang sama. Manakah yang akan Anda rekomendasikan dan mengapa? Justifikasikan jawaban Anda dengan mempertimbangkan prinsip "defense in depth".</p>
-                <div class="options-grid">
-                    <label><input type="radio" name="q1" value="A"> A. Desain Private-Public, karena lebih sederhana dan hemat biaya.</label>
-                    <label><input type="radio" name="q1" value="B"> B. Desain DMZ, karena memberikan segmentasi jaringan dan lapisan pertahanan tambahan yang krusial.</label>
-                    <label><input type="radio" name="q1" value="C"> C. Keduanya sama amannya karena menggunakan Stateful Firewall yang sama.</label>
-                </div>
-            </div>
-            <div class="question-block">
-                <p class="question-text">2. Seorang teknisi junior berpendapat, "Di ZPF, lalu lintas di dalam zona yang sama diizinkan secara default, jadi keamanannya sama saja dengan DMZ klasik." Apa kesalahpahaman utama dalam argumen ini?</p>
-                <div class="options-grid">
-                    <label><input type="radio" name="q2" value="A"> A. Argumennya benar, ZPF dan DMZ klasik pada dasarnya sama.</label>
-                    <label><input type="radio" name="q2" value="B"> B. Kesalahannya adalah ZPF tidak mengizinkan lalu lintas di dalam zona yang sama.</label>
-                    <label><input type="radio" name="q2" value="C"> C. Kesalahannya adalah mengabaikan kekuatan ZPF dalam membuat banyak zona granular dan kebijakan antar-zona yang secara default menolak semua lalu lintas.</label>
-                </div>
-            </div>
             <h3>Bagian 1: Desain dan Kebijakan Firewall (Soal 1-9)</h3>
             <div class="question-block"><p class="question-text">1. Startup fintech harus meng-hosting server web publik dan database nasabah internal. Manakah desain firewall yang memberikan implementasi prinsip "defense in depth" paling baik?</p><div class="options-grid"><label><input type="radio" name="q1" value="A"> A. Desain Private-Public sederhana.</label><label><input type="radio" name="q1" value="B"> B. Desain DMZ.</label><label><input type="radio" name="q1" value="C"> C. Menggunakan Host-based Firewall saja.</label></div></div>
             <div class="question-block"><p class="question-text">2. Seorang teknisi junior mengklaim ZPF sama amannya dengan DMZ klasik karena lalu lintas <i>intra-zone</i> diizinkan secara default. Apa kesalahpahaman utama dalam klaim ini?</p><div class="options-grid"><label><input type="radio" name="q2" value="A"> A. Klaim tersebut sepenuhnya benar.</label><label><input type="radio" name="q2" value="B"> B. Ia mengabaikan kekuatan ZPF dalam membuat banyak zona granular dan kebijakan <i>inter-zone</i> yang default-deny.</label><label><input type="radio" name="q2" value="C"> C. Lalu lintas <i>intra-zone</i> di ZPF sebenarnya default-deny.</label></div></div>
@@ -264,10 +247,11 @@
         
         // Kunci jawaban (untuk soal yang sudah ada)
         const correctAnswers = {
-            q1: 'B',
-            q2: 'C'
-            // Tambahkan kunci jawaban untuk soal 3-45 di sini
-            // contoh: q3: 'A', q4: 'C', dst.
+            q1: 'B', q2: 'C', q3: 'A', q4: 'C', q5: 'C', q6: 'B', q7: 'B', q8: 'B', q9: 'B', q10: 'A',
+            q11: 'B', q12: 'B', q13: 'B', q14: 'B', q15: 'B', q16: 'B', q17: 'B', q18: 'B', q19: 'B', q20: 'B',
+            q21: 'B', q22: 'B', q23: 'B', q24: 'C', q25: 'B', q26: 'B', q27: 'B', q28: 'B', q29: 'B', q30: 'B',
+            q31: 'B', q32: 'B', q33: 'B', q34: 'B', q35: 'A', q36: 'B', q37: 'B', q38: 'B', q39: 'C', q40: 'C',
+            q41: 'C', q42: 'B', q43: 'A', q44: 'B', q45: 'B'
         };
         
         const formElements = event.target.elements;
